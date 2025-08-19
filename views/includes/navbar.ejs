@@ -1,0 +1,123 @@
+<style>
+  /* Navbar */
+  .navbar {
+    background: #fff;
+    border-bottom: 1px solid #eaeaea;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 0.6rem 1.5rem;
+  }
+
+  .navbar-brand i {
+    font-size: 1.5rem;
+    color: #ff385c; /* AirBnB style compass */
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 1rem;
+    color: #333;
+    margin: 0 0.5rem;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #ff385c;
+  }
+
+  /* Search bar */
+  .navbar .form-control {
+    border-radius: 25px 0 0 25px;
+    padding: 0.4rem 1rem;
+    width: 300px;
+    border: 1px solid #ddd;
+    box-shadow: none;
+    border-radius: 25px;
+    transition: border-color 0.2s ease-in-out;
+  }
+
+  .navbar .btn {
+    border-radius: 0 25px 25px 0;
+    padding: 0.4rem 1.5rem;
+    background: #fff;
+    border: 1px solid tomato;
+    border-left: none;
+    color: tomato;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Space between icon and text */
+    border-radius: 25px;
+  }
+
+  .navbar .btn:hover {
+    background: tomato;
+    color: #fff;
+  }
+
+  /* Tax toggle box */
+  .tax-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+  }
+
+  .tax-toggle {
+    background: #fff;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    font-size: 0.9rem;
+    color: #444;
+  }
+
+  .form-check-input {
+    width: 2.5rem;
+    height: 1.2rem;
+    cursor: pointer;
+  }
+</style>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-md sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarNavAltMarkup">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <!-- Left -->
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+
+      <!-- Center -->
+      <div class="navbar-nav mx-auto">
+        <form class="d-flex" role="search">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search"/>
+          <button class="btn" type="submit">
+            <i class="fa fa-magnifying-glass"></i> Search
+          </button>
+        </form>
+      </div>
+
+      <!-- Right -->
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Your Home</a>
+        <% if (!currUser) { %>
+          <a class="nav-link" href="/signup"><b>Signup</b></a>
+          <a class="nav-link" href="/login"><b>Log In</b></a>
+        <% } %>
+        <% if (currUser) { %>
+          <a class="nav-link" href="/logout">Logout</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

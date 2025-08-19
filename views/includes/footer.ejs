@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wanderlust</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding-bottom: 60px; /* give space so content doesn't overlap footer */
+      font-family: Arial, sans-serif;
+    }
+
+    footer {
+      position: fixed;      /* always visible */
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #111;     /* dark theme */
+      color: #fff;
+      padding: 15px 0;
+      border-top: 1px solid #444;
+      z-index: 1000;
+    }
+
+    footer .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      footer .container {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: #ff9800; /* highlight on hover */
+    }
+
+    .social-icons a {
+      margin: 0 8px;
+    }
+  </style>
+</head>
+<body>
+ 
+  <footer>
+    <div class="container">
+      <!-- Social Icons -->
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/in/prashik-muneshwar/" target="_blank"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+        <a href="https://www.instagram.com/prashik_m_1999/" target="_blank"><i class="fa-brands fa-instagram fa-lg"></i></a>
+        <a href="https://github.com/PRASHIK-99" target="_blank"><i class="fa-brands fa-github fa-lg"></i></a>
+        <a href="https://my-portfolio-two-omega-96.vercel.app/" target="_blank"><i class="fa-solid fa-briefcase fa-lg"></i></a>
+      </div>
+
+      <!-- Brand -->
+      <div>&copy; Wanderlust Private Limited</div>
+
+      <!-- Links -->
+      <div>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

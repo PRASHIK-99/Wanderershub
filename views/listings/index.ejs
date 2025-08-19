@@ -1,0 +1,290 @@
+<% layout('/layouts/boilerplate') %>
+
+<style> 
+  /* Filters Section */
+  #filters-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  #filters-wrapper {
+    overflow-x: auto;        
+    white-space: nowrap;     
+    scrollbar-width: none;   
+    -ms-overflow-style: none;
+    padding: 0.8rem 0;
+    flex: 1;
+  }
+
+  #filters-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  #filters {
+    display: inline-flex; 
+    gap: 1.8rem;
+    padding: 0 2rem;
+  }
+
+  .filter {
+    flex: 0 0 auto;
+    text-align: center;
+    opacity: 0.75;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+  }
+
+  .filter:hover,
+  .filter.active {
+    opacity: 1;
+    transform: translateY(-2px);
+    color: #111;
+  }
+
+  .filter p {
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+  }
+
+  /* Scroll buttons */
+  .scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease;
+  }
+
+  .scroll-btn:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  #scroll-left {
+    left: 5px;
+  }
+
+  #scroll-right {
+    right: 5px;
+  }
+
+  /* Tax toggle wrapper (center aligned) */
+  .tax-toggle-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+  }
+
+  /* Tax toggle box */
+  .tax-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    font-size: 0.95rem;
+    color: #374151;
+    min-width: 340px;
+  }
+
+  .tax-toggle label {
+    margin: 0;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .tax-info {
+    display: none; /* Hidden by default */
+  }
+
+  /* Custom Switch */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: 0.3s;
+    border-radius: 24px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+  }
+
+  .switch input:checked + .slider {
+    background-color: #111;
+  }
+
+  .switch input:checked + .slider:before {
+    transform: translateX(22px);
+  }
+
+  /* Listing cards */
+  .listing-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .listing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  }
+
+  .overlay-text {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .listing-card:hover .overlay-text {
+    opacity: 1;
+  }
+</style>
+
+<!-- Filter Section -->
+<div id="filters-container">
+  <button id="scroll-left" class="scroll-btn">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+
+  <div id="filters-wrapper">
+    <div id="filters">
+      <div class="filter"><div><i class="fa-solid fa-fire"></i></div><p>Trending</p></div>
+      <div class="filter"><div><i class="fa-solid fa-bed"></i></div><p>Rooms</p></div>
+      <div class="filter"><div><i class="fa-solid fa-mountain"></i></div><p>Adventure</p></div>
+      <div class="filter"><div><i class="fa-solid fa-umbrella-beach"></i></div><p>Beach</p></div>
+      <div class="filter"><div><i class="fa-solid fa-city"></i></div><p>City Life</p></div>
+      <div class="filter"><div><i class="fa-solid fa-campground"></i></div><p>Camping</p></div>
+      <div class="filter"><div><i class="fa-solid fa-tree"></i></div><p>Nature</p></div>
+      <div class="filter"><div><i class="fa-solid fa-person-skiing"></i></div><p>Skiing</p></div>
+      <div class="filter"><div><i class="fa-solid fa-water"></i></div><p>Lakes</p></div>
+      <div class="filter"><div><i class="fa-solid fa-sailboat"></i></div><p>Boating</p></div>
+      <div class="filter"><div><i class="fa-solid fa-mug-hot"></i></div><p>Cafes</p></div>
+      <div class="filter"><div><i class="fa-solid fa-masks-theater"></i></div><p>Cultural</p></div>
+      <div class="filter"><div><i class="fa-solid fa-music"></i></div><p>Music</p></div>
+      <div class="filter"><div><i class="fa-solid fa-champagne-glasses"></i></div><p>Nightlife</p></div>
+      <div class="filter"><div><i class="fa-solid fa-spa"></i></div><p>Wellness</p></div>
+      <div class="filter"><div><i class="fa-solid fa-person-hiking"></i></div><p>Hiking</p></div>
+      <div class="filter"><div><i class="fa-solid fa-car"></i></div><p>Road Trips</p></div>
+      <div class="filter"><div><i class="fa-solid fa-mountain-sun"></i></div><p>Mountains</p></div>
+      <div class="filter"><div><i class="fa-solid fa-ship"></i></div><p>Cruises</p></div>
+      <div class="filter"><div><i class="fa-solid fa-paw"></i></div><p>Pet Friendly</p></div>
+      <div class="filter"><div><i class="fa-solid fa-wine-glass"></i></div><p>Wineries</p></div>
+      <div class="filter"><div><i class="fa-solid fa-bicycle"></i></div><p>Cycling</p></div>
+      <div class="filter"><div><i class="fa-solid fa-dumbbell"></i></div><p>Fitness</p></div>
+      <div class="filter"><div><i class="fa-solid fa-fish"></i></div><p>Fishing</p></div>
+      <div class="filter"><div><i class="fa-solid fa-binoculars"></i></div><p>Wildlife</p></div>
+      <div class="filter"><div><i class="fa-solid fa-camera-retro"></i></div><p>Photography</p></div>
+      <div class="filter"><div><i class="fa-solid fa-bath"></i></div><p>Luxury</p></div>
+      <div class="filter"><div><i class="fa-solid fa-person-swimming"></i></div><p>Swimming</p></div>
+      <div class="filter"><div><i class="fa-solid fa-burger"></i></div><p>Street Food</p></div>
+      <div class="filter"><div><i class="fa-solid fa-tent"></i></div><p>Glamping</p></div>
+      <div class="filter"><div><i class="fa-solid fa-drum"></i></div><p>Festivals</p></div>
+    </div>
+  </div>
+
+  <button id="scroll-right" class="scroll-btn">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+</div>
+
+<!-- Tax Toggle (Centered) -->
+<div class="tax-toggle-wrapper">
+  <div class="tax-toggle">
+    <label for="flexSwitchCheckDefault">Display total price</label>
+    <span style="flex:1; color:#6b7280; font-size:0.85rem;">Includes all fees, before taxes</span>
+    <label class="switch">
+      <input type="checkbox" id="flexSwitchCheckDefault">
+      <span class="slider"></span>
+    </label>
+  </div>
+</div>
+
+<!-- Listings -->
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4 mt-3">
+  <% for (let listing of allListings) { %>
+    <a href="/listings/<%= listing._id %>" class="listing-link text-decoration-none">
+      <div class="card listing-card border-0 rounded">
+        <img 
+          src="<%= listing.image?.url || listing.image?.path || listing.image %>" 
+          class="card-img-top" 
+          alt="listing_image"
+          style="height: 20rem; object-fit: cover;"
+        />
+        <div class="card-body">
+          <p class="card-text">
+            <b class="d-block mb-2"><%= listing.title %></b> 
+            &#8377; <%= listing.price.toLocaleString("en-IN") %>/night
+            <i class="tax-info"> &nbsp; &nbsp; +18% GST</i>
+          </p>
+        </div>
+        <div class="card-img-overlay d-flex justify-content-center align-items-center text-white">
+          <span class="overlay-text fs-4">View Listing</span>
+        </div>
+      </div>
+    </a>
+  <% } %>
+</div>
+
+<!-- Script -->
+<script>
+  // Scroll buttons
+  const filtersWrapper = document.getElementById("filters-wrapper");
+  const scrollLeftBtn = document.getElementById("scroll-left");
+  const scrollRightBtn = document.getElementById("scroll-right");
+
+  scrollLeftBtn.addEventListener("click", () => {
+    filtersWrapper.scrollBy({ left: -200, behavior: "smooth" });
+  });
+
+  scrollRightBtn.addEventListener("click", () => {
+    filtersWrapper.scrollBy({ left: 200, behavior: "smooth" });
+  });
+
+  // Tax toggle
+  const taxSwitch = document.getElementById("flexSwitchCheckDefault");
+  taxSwitch.addEventListener("change", () => {
+    const taxInfo = document.getElementsByClassName("tax-info");
+    for (let info of taxInfo) {
+      info.style.display = taxSwitch.checked ? "inline" : "none";
+    }
+  });
+</script>
